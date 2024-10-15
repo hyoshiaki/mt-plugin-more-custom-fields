@@ -8,7 +8,7 @@ author_name: 'Dan Wolfgang, uiNNOVATIONS'
 author_link: http://uinnovations.com
 plugin_link: http://eatdrinksleepmovabletype.com/plugins/more_custom_fields/
 doc_link: http://eatdrinksleepmovabletype.com/plugins/more_custom_fields/
-
+l10n_class: MoreCustomFields::L10N
 customfield_types: $MoreCustomFields::MoreCustomFields::Plugin::load_customfield_types
 
 init_app: $MoreCustomFields::MoreCustomFields::Plugin::init_app

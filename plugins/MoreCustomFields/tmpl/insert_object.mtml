@@ -1,17 +1,38 @@
-<mt:Include name="dialog/header.tmpl">
-
-<h2>The object should have been inserted, and you shouldn't even see this page.</h2>
-<p>Object title: <mt:Var name="obj_title"></p>
-<p>Object ID: <mt:Var name="obj_id"></p>
-<p>Edit field: <mt:Var name="edit_field"></p>
-<p>Object Blog ID: <mt:Var name="obj_blog_id"></p>
-
-<button
-   type="submit"
-   accesskey="x"
-   class="cancel action button mt-close-dialog">
-  <__trans phrase="Close"></button>
-
+<MTVersion setvar="mtver">
+<mt:SetVarBlock name="page_title">
+    <mt:If name="entry_or_page">
+        <__trans phrase="Select Entry or Page">
+    <mt:Else>
+        <mt:If name="type" eq="page">
+            <__trans phrase="Select Page">
+        <mt:Else>
+            <__trans phrase="Select Entry">
+        </mt:If>
+    </mt:If>
+</mt:SetVarBlock>
+<$mt:setvar name="position_actions_bottom" value="1"$>
+<mt:setvarblock name="content_header"></mt:setvarblock>
+<mt:setvarblock name="related_content"></mt:setvarblock>
+<mt:setvarblock name="close_buttons">
+    <button
+        type="button"
+        accesskey="x"
+        onclick="//parent.jQuery.fn.mtDialog.close()"
+        title="<__trans phrase="Close">"
+        class="action cancel mt-close-dialog btn btn-default"
+        data-dismiss="modal"
+        data-mt-modal-close
+        ><__trans phrase="Close"></button>
+</mt:setvarblock>
+<mt:setvarblock name="dialog_close_button">
+    <a
+        accesskey="x"
+        onclick="parent.jQuery.fn.mtDialog.close()"
+        title="<__trans phrase="Close">"
+        class="dialog-close"
+        ></a>
+</mt:setvarblock>
+<mt:setvarblock name="modal_body">
 <script type="text/javascript">
 <mt:If name="inserts_loop">
     <mt:Loop name="inserts_loop">
@@ -34,12 +55,33 @@
         '<mt:Var name="obj_blog_id">'
     );
 </mt:If>
-    
-<mt:If tag="Version" lt="5">
-    closeDialog();
-<mt:Else>
-    parent.jQuery.fn.mtDialog.close();
-</mt:If>
+window.top.jQuery.fn.mtModal.close();
 </script>
+<h2>The object should have been inserted, and you shouldn't even see this page.</h2>
+<p>Object title: <mt:Var name="obj_title"></p>
+<p>Object ID: <mt:Var name="obj_id"></p>
+<p>Edit field: <mt:Var name="edit_field"></p>
+<p>Object Blog ID: <mt:Var name="obj_blog_id"></p>
+</mt:setvarblock>
 
-<mt:Include name="dialog/footer.tmpl">
+<mt:setvarblock name="modal_footer">
+<div class="action-bar">
+    <span class="button-actions actions">
+    <$mt:var name="close_buttons"$>
+    </span>
+</div>
+</mt:setvarblock>
+
+<mt:setvarblock name="html_head" append="1"></mt:setvarblock>
+<mt:setvarblock name="html_body" append="1"></mt:setvarblock>
+<mt:setvarblock name="js_include" append="1">
+<script type="text/javascript" src="<mt:var name="static_uri">jquery/jquery.min.js"></script>
+<script type="text/javascript" src="<mt:var name="static_uri">jquery/jquery.mt.min.js"></script>
+<script>
+</script>
+</mt:setvarblock>
+<mt:setvarblock name="jq_js_include" append="1"></mt:setvarblock>
+<mt:if name="mtver" ge="7">
+  <mt:include name="layout/modal.tmpl">
+  <mt:var name="layout">
+<mt:else></mt:if>

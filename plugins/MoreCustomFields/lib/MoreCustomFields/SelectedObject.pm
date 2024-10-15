@@ -92,7 +92,9 @@ sub _field_html {
 <mt:SetVarBlock name="blog_ids"><mt:If name="options"><mt:Var name="options"><mt:Else><mt:Var name="blog_id"></mt:If></mt:SetVarBlock>
 
 <a
-<mt:If tag="Version" lt="5">
+<mt:If tag="Version" ge="7">
+    class="mt-open-dialog mt-modal-open" data-mt-modal-large="" href="<mt:Var name='script_uri'>?__mode=<mt:Var name='mode'>&amp;blog_id=<mt:Var name='blog_id'>&amp;blog_ids=<mt:Var name='blog_ids'>&amp;edit_field=<mt:Var name='field_id'>"
+<mt:ElseIf tag="Version" lt="5">
     onclick="return openDialog(this.form, '<mt:Var name="mode">', 'blog_id=<mt:Var name="blog_id">&blog_ids=<mt:Var name="blog_ids">&edit_field=<mt:Var name="field_id">')"
 <mt:Else>
     onclick="jQuery.fn.mtDialog.open('<mt:Var name="script_uri">?__mode=<mt:Var name="mode">&amp;blog_id=<mt:Var name="blog_id">&amp;blog_ids=<mt:Var name="blog_ids">&amp;edit_field=<mt:Var name="field_id">')"
